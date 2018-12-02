@@ -18,12 +18,14 @@
 
 	var x = canvas.width/2;
 	var y = canvas.height-30;
-	var dx = .5;
-	var dy = -0.5;
+	var dx = 1;
+	var dy = -1;
+
+	var ballRadius = 10;
 
 	function drawBall() {
 		ctx.beginPath();
-		ctx.arc(x, y, 10, 0, Math.PI*2);
+		ctx.arc(x, y, ballRadius, 0, Math.PI*2);
 		ctx.fillStyle = "#0095DD";
 		ctx.fill();
 		ctx.closePath();
@@ -31,6 +33,15 @@
 
 	function draw() {
 		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+		if(y + dy < ballRadius || y + dy > 
+			canvas.height-ballRadius) {
+			dy = -dy;
+		}
+		if(x + dx < ballRadius || x + dx > 
+			canvas.width-ballRadius) {
+			dx = -dx;
+		}
 		//clearRect(top left x, top left y, bottom right x,
 		//bottom right y) of area u wanna clear
 		drawBall();
