@@ -69,10 +69,21 @@
 						y < b.y+brickHeight) {
 						dy = -dy;
 						b.status = 0;
+						score++;
+						if(score == brickRowCount*brickColumnCount) {
+							alert("You win! Congratulations!");
+							document.location.reload();
+						}
 					}
 				}
 			}
 		}
+	}
+
+	function drawScore() {
+		ctx.font = "16px Arial";
+		ctx.fillStyle = "#0095DD";
+		ctx.fillText("Score: " +score, 8, 20);
 	}
 
 	function keyUpHandler(e) { //key is released
@@ -128,6 +139,7 @@
 		drawBall();
 		drawBricks();
 		drawPaddle();
+		drawScore();
 		collisionDetection();
 
 		if(y + dy < ballRadius) {
